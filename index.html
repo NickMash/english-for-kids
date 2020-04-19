@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main__container">
+            <div class="shadow_body_none" id="shadow_body"></div>
+            <nav class="navigation__container" id="nav">
+                <div class="navigation__main_item" id="navigation__main_item">
+                    <figure class="sphere_3d bubble">
+                        <div class="lines"> ≡ </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="family">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> &nbsp;Family </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="emotions">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Emotions </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="movements">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Movements </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="nature">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> &nbsp;Nature </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="transport">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Transport </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="pets">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> &nbsp;&nbsp;&nbsp;&nbsp;Pets </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="weather">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Weather </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="animals">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Animals </div>
+                    </figure>
+                </div>
+                <div class="menu_item_hidden toggle" id="statistics">
+                    <figure class="sphere_3d bubble">
+                        <div class="item_name"> Statistics </div>
+                    </figure>
+                </div>
+            </nav>
+            <div class="letters_card_container">
+                <div class="game_letters switch_off"></div>
+                <div class="for_adding"></div>
+            </div>
+            <div class="switch__container" id="switch__container">
+                <label class="switch">
+                    <input type="checkbox" class="checkbox" />
+                    <span class="switch_div" id="switch_div"></span>
+                    <span class="switch_name" id="switch_train">Train</span>
+                    <span class="switch_name switch_off" id="switch_game">Game</span>
+                </label>
+            </div>
+            <script src="script.js"></script>
+        </div>
+    </body>
 </html>
