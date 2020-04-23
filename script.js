@@ -104,8 +104,8 @@ const allCardsInfo = {
         {name: 'Brother', class: 'card', imageLink: 'images/cards/family/brother.jpg', translation: 'Брат'},
         {name: 'Grandmother, Grandfather', class: 'card', imageLink: 'images/cards/family/grandma_pa.jpg', translation: 'Бабушка, Дедушка'},
         {name: 'Granddaughter, Grandson', class: 'card', imageLink: 'images/cards/family/granddaughter_son.jpg', translation: 'Внук, Внучка'},
-        {name: 'Uncle', class: 'card', imageLink: 'images/cards/family/uncle.jpg', translation: 'Шторм'},
-        {name: 'Aunt', class: 'card', imageLink: 'images/cards/family/aunt.jpg', translation: 'Ураган'},
+        {name: 'Uncle', class: 'card', imageLink: 'images/cards/family/uncle.jpg', translation: 'Дядя'},
+        {name: 'Aunt', class: 'card', imageLink: 'images/cards/family/aunt.jpg', translation: 'Тетя'},
         {name: 'Cousin', class: 'card', imageLink: 'images/cards/family/cousin.jpg', translation: 'Двоюродный брат, Двоюродная сестра)'},
         {name: 'Godfather, Godmother', class: 'card', imageLink: 'images/cards/family/godfather_mother.jpg', translation: 'Крестный папа, Крестная мама'},
         {name: 'Niece', class: 'card', imageLink: 'images/cards/family/niece.jpg', translation: 'Племянница'},
@@ -186,26 +186,54 @@ let createCards = (categoryName) => {
     let n = document.querySelector('.for_adding');
 
     n.insertAdjacentHTML('afterbegin', '<div class="cards__container"></div>');
-    console.log(categoryName);
-    allCardsInfo[categoryName].forEach((elem)=> {
-        document.querySelector('.cards__container').innerHTML += `
+
+    let checkbox = document.querySelector('.checkbox');
+    if (checkbox.checked) {
+        allCardsInfo[categoryName].forEach((elem)=> {
+
+            document.querySelector('.cards__container').innerHTML += `
         <div class="card_box card-wrapper">
              <div class="container card">
                  <div class="side">
                      <div class="content">
                          <div class="turn_around_button"></div>
-                         <p class="card_name">${elem.name}</p>
+                         <p class="card_name toggle_name switch_off">${elem.name}</p>
                      </div>
                  </div>
                  <div class="back side">
                      <div class="content">
-                         <p class="card_name">${elem.translation}</p>
+                     <p class="card_name toggle_name switch_off">${elem.translation}</p>
                      </div>
                  </div>
              </div>
          </div>
 `
-    });
+        });
+    } else {
+        allCardsInfo[categoryName].forEach((elem)=> {
+
+            document.querySelector('.cards__container').innerHTML += `
+        <div class="card_box card-wrapper">
+             <div class="container card">
+                 <div class="side">
+                     <div class="content">
+                         <div class="turn_around_button"></div>
+                         <p class="card_name toggle_name">${elem.name}</p>
+                     </div>
+                 </div>
+                 <div class="back side">
+                     <div class="content">
+                         <p class="card_name toggle_name">${elem.translation}</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+`
+        });
+    }
+
+
+
 
     let card = document.querySelectorAll(".card");
     let back = document.querySelectorAll(".back");
@@ -276,39 +304,82 @@ let moves3d = () => {
 
 createCategories();
 
-let category = document.querySelectorAll(".card_box");
+let openCategoryFromCardsMenu = () => {
+    let category = document.querySelectorAll(".card_box");
 
-for (let i = 0; i < category.length; i++){
-    category[i].addEventListener("click", (e) => {
-        e.preventDefault();
-        if (e.target.className === 'turn_around_button') {
-            let img = document.querySelectorAll(".card");
-            img[i].style.transform = 'rotateY(180deg)';
-            img[i].style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
-        } else {
-            console.log(e);
-            e.path.forEach((elem) => {
-                console.log(elem);
-                if (elem.id && elem.id !== 'categories') {
-                    openCategory(elem.id)
-                }
-            });
-        }
-    });
-}
-
-let menuItems = document.querySelectorAll(".toggle");
-
-for (let i = 0; i < menuItems.length; i++){
-    menuItems[i].addEventListener("click", (e) => {
-        e.preventDefault();
-        e.path.forEach((elem) => {
-            if (elem.id && elem.id !== 'nav') {
-                openCategory(elem.id)
+    for (let i = 0; i < category.length; i++){
+        category[i].addEventListener("click", (e) => {
+            e.preventDefault();
+            if (e.target.className === 'turn_around_button') {
+                let img = document.querySelectorAll(".card");
+                img[i].style.transform = 'rotateY(180deg)';
+                img[i].style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
+            } else {
+                console.log(e);
+                e.path.forEach((elem) => {
+                    console.log(elem);
+                    if (elem.id && elem.id !== 'categories') {
+                        openCategory(elem.id)
+                    }
+                });
             }
         });
-    });
-}
+    }
+};
+
+openCategoryFromCardsMenu();
+
+let openCategoryFromBubblesMenu = () => {
+    let menuItems = document.querySelectorAll(".toggle");
+
+    for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let cardNames = document.querySelector('.toggle_name');
+
+            if (cardNames === null) {
+                e.path.forEach((elem) => {
+                    if (elem.id && elem.id !== 'nav') {
+                        openCategory(elem.id)
+                    }
+                });
+                return;
+            }
+            if (cardNames.classList.contains('switch_off')) {
+                e.path.forEach((elem) => {
+                    if (elem.id && elem.id !== 'nav') {
+                        openCategory(elem.id)
+                    }
+                });
+
+                let allCardsNames = document.querySelectorAll('.toggle_name');
+                let checkbox = document.querySelector('.checkbox');
+                if (checkbox.checked) {
+                    allCardsNames.forEach((elem)=> {
+                        elem.classList.toggle('switch_off');
+                    });
+                } else {
+                    allCardsNames.forEach((elem)=> {
+                        elem.classList.toggle('switch_off');
+                    });
+                }
+
+                allCardsNames.forEach((elem)=> {
+                    elem.classList.toggle('switch_off');
+                });
+            } else {
+                e.path.forEach((elem) => {
+                    if (elem.id && elem.id !== 'nav') {
+                        openCategory(elem.id)
+                    }
+                });
+            }
+        });
+    }
+};
+
+openCategoryFromBubblesMenu();
 
 let openMenu = () => {
 
@@ -322,8 +393,19 @@ let openMenu = () => {
             item[i].classList.toggle('menu_item');
             document.getElementById('shadow_body').classList.toggle('shadow_body_none');
             document.getElementById('shadow_body').classList.toggle('shadow_body');
-        })
+        });
     }
+    let shadowBody = document.getElementById('shadow_body');
+    for (let i = 0; i < item.length; i++) {
+        shadowBody.addEventListener("click", (e) => {
+            e.preventDefault();
+            item[i].classList.toggle('menu_item_hidden');
+            item[i].classList.toggle('menu_item');
+            document.getElementById('shadow_body').classList.toggle('shadow_body_none');
+            document.getElementById('shadow_body').classList.toggle('shadow_body');
+        });
+    }
+
 };
 
 openMenu();
@@ -337,10 +419,56 @@ let switchMode = () => {
         e.preventDefault();
         switchTrain.classList.toggle('switch_off');
         switchGame.classList.toggle('switch_off');
-        let n = document.querySelector('.game_letters');
 
-        n.classList.toggle('switch_off');
+        if (document.body.clientWidth >= 1471) {
+            let n = document.querySelector('.game_letters');
+            n.classList.toggle('switch_off');
+
+            let d = document.querySelector('.game_letters_mobile');
+            d.classList.toggle('switch_on');
+        }
+
+        if (document.body.clientWidth <= 591) {
+            let n = document.querySelector('.game_letters');
+            n.classList.toggle('switch_off');
+
+            let d = document.querySelector('.game_letters_mobile');
+            d.classList.toggle('switch_on');
+        } else {
+            let n = document.querySelector('.game_letters');
+            n.classList.toggle('switch_on');
+
+            let d = document.querySelector('.game_letters_mobile');
+            d.classList.toggle('switch_off');
+        }
+
+
+        let allCardsNames = document.querySelectorAll('.toggle_name');
+        let checkbox = document.querySelector('.checkbox');
+        if (checkbox.checked) {
+            allCardsNames.forEach((elem)=> {
+                elem.classList.toggle('switch_off');
+            });
+        } else {
+            allCardsNames.forEach((elem)=> {
+                elem.classList.toggle('switch_off');
+            });
+        }
     });
 };
 
 switchMode();
+
+/*let speachVoice = () => {
+    let url = "https://code.responsivevoice.org/responsivevoice.js?key=tp7NrV19";
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", url);
+    xhr.send('disaster');
+
+    responsiveVoice.speak("hello world");
+
+
+};
+
+speachVoice();*/
