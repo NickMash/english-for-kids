@@ -1,7 +1,15 @@
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
 html, body {
     width: 100%;
     height: 100%;
-    background-image: url(https://wallpapershome.ru/images/pages/pic_h/17766.jpg);
+    background-image: url(images/background.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -9,7 +17,11 @@ html, body {
     margin: 0;
     padding: 0;
 }
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 .main__container {
+    margin: 0 auto;
     display: flex;
 }
 .shadow_body_none {
@@ -20,20 +32,52 @@ html, body {
     display: block;
     width: 100%;
     height: 100%;
+    left: 0;
+    top: 0;
     background: #000000;
     opacity:0.5;
-    z-index: 1;
+    z-index: 12;
 }
 .game_letters {
-    margin: 0 auto;
-    width: 250px;
-    height: 140px;
+    margin: -120px auto 0 auto;
+    width: 270px;
+    height: 120px;
     background: url("images/game.png");
     background-size: cover;
+    cursor: pointer;
+    -webkit-transition: all 0.08s ease;
+    -moz-transition: all 0.08s ease;
+    -o-transition: all 0.08s ease;
+    transition: all 0.08s ease;
+}
+.game_letters:hover {
+    margin: -125px auto 0 auto;
+    width: 290px;
+    height: 129px;
+}
+.game_letters_mobile {
+    margin: 30px auto 0 auto;
+    width: 270px;
+    height: 120px;
+    background: url("images/game.png");
+    background-size: cover;
+    cursor: pointer;
+    -webkit-transition: all 0.08s ease;
+    -moz-transition: all 0.08s ease;
+    -o-transition: all 0.08s ease;
+    transition: all 0.08s ease;
+    transform: scale(0.8);
+}
+.game_letters_mobile:hover {
+    margin: 25px auto -5px auto;
+    width: 290px;
+    height: 129px;
+    transform: scale(0.8);
 }
 .navigation__container {
     width: 145px;
-    z-index: 2;
+    height: 145px;
+    z-index: 11;
 }
 .navigation__main_item {
     width: 180px;
@@ -305,7 +349,6 @@ html, body {
     align-items: center;
     width: 100%;
 }
-
 .cards__container {
     margin: 25px auto;
     top: 0; left: 0; bottom: 0; right: 0;
@@ -377,12 +420,12 @@ html, body {
 }
 
 .card_name {
+    margin: 0;
     font-size: 210%;
     color: #dfdfdf;
     text-align: center;
     width: 100%;
-    margin-top: -5px;
-    height: 268px;
+    height: 262px;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -397,9 +440,10 @@ html, body {
 }
 .turn_around_button {
     position: absolute;
-    width: 55px;
-    height: 55px;
-    margin-left: 195px;
+    width: 60px;
+    height: 60px;
+    z-index: 3;
+    margin: -13px 0 0 195px;
     background: url(images/turn_around_icon.png);
     background-size: cover;
     -webkit-transition: all 0.1s ease;
@@ -408,9 +452,9 @@ html, body {
     transition: all 0.1s ease;
 }
 .turn_around_button:hover {
-    margin: -3px 0 0 192px;
-    width: 61px;
-    height: 61px;
+    margin: -16px 0 0 192px;
+    width: 66px;
+    height: 66px;
     cursor: pointer;
 }
 .card_box {
@@ -432,8 +476,8 @@ html, body {
 .side {
     position: absolute;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    width: 256px;
+    height: 256px;
     color: #dfdfdf;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -441,12 +485,18 @@ html, body {
 }
 .content {
     transform: translatez(70px) scale(0.8);
+    width: 256px;
+    height: 256px;
+    margin: 0 auto;
 }
 .back {
     transform: rotateY(180deg);
 }
 .switch__container {
+    width: 140px;
+    height: 130px;
     margin: 25px 21px 0 0;
+    z-index: 10;
 }
 .switch, .switch__container, .checkbox, .switch_div {
     box-sizing: border-box;
@@ -517,6 +567,7 @@ html, body {
     text-align: center;
     width: 100%;
     margin-top: 10px;
+    margin-left: 9px;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -528,9 +579,496 @@ html, body {
     cursor: pointer;
     text-shadow:0px 0px 0 rgb(202,202,202),1px -1px 0 rgb(158,158,158), 2px -2px 0 rgb(115,115,115),3px -3px 2px rgba(0,0,0,0.6),3px -3px 1px rgba(0,0,0,0.5),0px 0px 2px rgba(0,0,0,.2);
 }
-.change_color {
-
-}
 .switch_off {
-     display: none;
+    display: none !important;
+}
+.switch_on {
+     display: block !important;
+}
+
+@media (min-width: 1471px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        min-width: 1195px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: absolute;
+        margin: 46px 0 0 0;
+        right: 0;
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -10px auto 0 -7px;
+        width: 0;
+        height: 0;
+        transform: scale(1.1);
+    }
+    .letters_card_container {
+        margin: 27px auto 0 auto;
+        position: relative;
+    }
+    .game_letters_mobile {
+        display: none;
+        transform: scale(1.0);
+    }
+    .game_letters_mobile:hover {
+        transform: scale(1.03);
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 1182px) and (max-width: 1470px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 1194px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 55px 0 0 1045px;
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -10px auto 0 -2px;
+        width: 0;
+        height: 0;
+        transform: scale(1.1);
+    }
+    .letters_card_container {
+        margin: 30px auto 0 auto;
+        position: relative;
+    }
+    .game_letters {
+        width: 240px;
+        height: 106px;
+        z-index: 11;
+        margin: -106px auto 0 auto;
+    }
+    .game_letters:hover {
+        margin: -115px auto 0 auto;
+        padding-bottom: -5px;
+        width: 290px;
+        height: 129px;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 1097px) and (max-width: 1183px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 888px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 55px 0 0 749px;
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -10px auto 0 -2px;
+        width: 0;
+        height: 0;
+        transform: scale(1.1);
+    }
+    .letters_card_container {
+        margin: 30px auto 0 auto;
+        position: relative;
+    }
+    .game_letters {
+        width: 240px;
+        height: 106px;
+        z-index: 11;
+        margin: -106px auto 0 331px;
+    }
+    .game_letters:hover {
+        margin: -115px auto 0 304px;
+        padding-bottom: -5px;
+        width: 290px;
+        height: 129px;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+
+@media (min-width: 888px) and (max-width: 1096px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 55px 0 0 749px;
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -10px auto 0 -2px;
+        width: 0;
+        height: 0;
+        transform: scale(1.1);
+    }
+    .letters_card_container {
+        margin: 30px auto 0 auto;
+        position: relative;
+    }
+    .game_letters {
+        width: 240px;
+        height: 106px;
+        z-index: 11;
+        margin: -106px auto 0 331px;
+    }
+    .game_letters:hover {
+        margin: -115px auto 0 304px;
+        padding-bottom: -5px;
+        width: 290px;
+        height: 129px;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 592px) and (max-width: 887px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin-top: -25px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 45px 0 0 454px;
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: 15px auto 0 -3px;
+        width: 0;
+        height: 0;
+        transform: scale(1.03);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: 41px auto 0 auto;
+    }
+    .game_letters {
+        width: 240px;
+        height: 106px;
+        z-index: 11;
+        margin: -106px auto 0 185px;
+        transform: scale(0.9);
+    }
+    .game_letters:hover {
+        margin: -115px auto 0 158px;
+        width: 290px;
+        height: 129px;
+        transform: scale(0.85);
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 391px) and (max-width: 591px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: 3px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.8);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.75);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 390px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: 3px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.8);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.73);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 341px) and (max-width: 360px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: 3px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.8);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.7);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 285px) and (max-width: 340px) {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: 3px;
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.7);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.65);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (min-width: 271px) and (max-width: 285px) {
+    .shadow_body {
+        width: 125%;
+        height: 112%;
+        left: -40px;
+        top: -81px;
+     }
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: -120px;
+        transform: scale(0.9);
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.7);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.65);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
+}
+
+@media (max-width: 270px) {
+    .shadow_body {
+        width: 125%;
+        height: 112%;
+        left: -40px;
+        top: -81px;
+    }
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-top: -220px;
+        transform: scale(0.8);
+    }
+    .switch__container {
+        order: -1;
+        z-index: 10;
+        position: relative;
+        margin: 19px 0 0 166px;
+        transform: scale(0.7);
+    }
+    .navigation__container {
+        order: -1;
+        z-index: 15;
+        position: relative;
+        margin: -8px auto 0 1px;
+        width: 0;
+        height: 0;
+        transform: scale(0.65);
+    }
+    .navigation__main_item {
+        width: 180px;
+        height: 180px;
+    }
+    .letters_card_container {
+        margin: -20px auto 0 auto;
+    }
+    .game_letters_mobile {
+        display: none;
+    }
+    .game_letters {
+        display: none !important;
+    }
+    .switch_name {
+        margin-left: -8px;
+    }
 }
