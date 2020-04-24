@@ -310,13 +310,13 @@ let openCategoryFromCardsMenu = () => {
     for (let i = 0; i < category.length; i++){
         category[i].addEventListener("click", (e) => {
             e.preventDefault();
+            let path = e.path || (e.composedPath && e.composedPath());
             if (e.target.className === 'turn_around_button') {
                 let img = document.querySelectorAll(".card");
                 img[i].style.transform = 'rotateY(180deg)';
                 img[i].style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
             } else {
-                console.log(e);
-                e.path.forEach((elem) => {
+                path.forEach((elem) => {
                     console.log(elem);
                     if (elem.id && elem.id !== 'categories') {
                         openCategory(elem.id)
@@ -337,9 +337,10 @@ let openCategoryFromBubblesMenu = () => {
             e.preventDefault();
 
             let cardNames = document.querySelector('.toggle_name');
+            let path = e.path || (e.composedPath && e.composedPath());
 
             if (cardNames === null) {
-                e.path.forEach((elem) => {
+                path.forEach((elem) => {
                     if (elem.id && elem.id !== 'nav') {
                         openCategory(elem.id)
                     }
@@ -347,7 +348,7 @@ let openCategoryFromBubblesMenu = () => {
                 return;
             }
             if (cardNames.classList.contains('switch_off')) {
-                e.path.forEach((elem) => {
+                path.forEach((elem) => {
                     if (elem.id && elem.id !== 'nav') {
                         openCategory(elem.id)
                     }
@@ -369,7 +370,7 @@ let openCategoryFromBubblesMenu = () => {
                     elem.classList.toggle('switch_off');
                 });
             } else {
-                e.path.forEach((elem) => {
+                path.forEach((elem) => {
                     if (elem.id && elem.id !== 'nav') {
                         openCategory(elem.id)
                     }
