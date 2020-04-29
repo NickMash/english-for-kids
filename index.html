@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>English for Kids</title>
-        <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
@@ -12,7 +11,7 @@
             <nav class="navigation__container" id="nav">
                 <div class="navigation__main_item" id="navigation__main_item">
                     <figure class="sphere_3d bubble">
-                        <div class="lines"> ≡ </div>
+                        <div class="main_bubble_lines"></div>
                     </figure>
                 </div>
                 <div class="menu_item_hidden toggle" id="family">
@@ -61,6 +60,7 @@
                     </figure>
                 </div>
             </nav>
+            <div class="return_button switch_off"></div>
             <div class="game_letters switch_off game_mode"></div>
             <div class="letters_card_container">
                 <div class="game_letters_mobile game_mode"></div>
@@ -69,13 +69,25 @@
             <div class="switch__container" id="switch__container">
                 <label class="switch">
                     <input type="checkbox" class="checkbox" id="checkbox" />
-                    <span class="switch_div" id="switch_div"></span>
-                    <span class="switch_name" id="switch_train">Train</span>
-                    <span class="switch_name switch_off" id="switch_game">Game</span>
+                    <span class="switch_div" id="switch_div">
+                        <span class="switch_name switch_name_train" id="switch_train">Train</span>
+                    <span class="switch_name switch_name_game switch_off" id="switch_game">Game</span>
+                    </span>
                 </label>
+                <div class="change_voice">
+                    <div class="select_voice us_male">US Male</div>
+                    <div class="select_voice us_female switch_off">US Female</div>
+                    <div class="select_voice uk_male switch_off">UK Male</div>
+                    <div class="select_voice uk_female switch_off">UK Female</div>
+                </div>
+                <div class="mistakes_scoreboard switch_off">
+                    <div class="mistakes_scoreboard_name">Mistakes:</div>
+                    <div class="mistakes_scoreboard_name count">55</div>
+                </div>
+                <div class="repeat_button switch_off"></div>
             </div>
         </div>
         <script src="https://code.responsivevoice.org/responsivevoice.js?key=tp7NrV19"></script>
-        <script src="script.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>
