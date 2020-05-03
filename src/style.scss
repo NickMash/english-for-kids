@@ -837,11 +837,11 @@ html, body {
         right: 0;
     }
     .navigation__container {
+        position: absolute;
         -webkit-box-ordinal-group: 0;
         -ms-flex-order: -1;
         order: -1;
         z-index: 15;
-        position: relative;
         margin: 21px auto -25px -7px;
         width: 0;
         height: 0;
@@ -890,6 +890,9 @@ html, body {
         width: 130px;
         height: 30px;
         margin: 0 auto;
+    }
+    .return_button {
+        position: fixed;
     }
 }
 
@@ -1176,11 +1179,25 @@ html, body {
         margin: 49px 0 -139px 16px;
     }
     .return_button_2 {
-        margin: -3px 0 -139px 16px;
+        margin: 7px 0 -129px 16px;
     }
     .mistakes_scoreboard {
         -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0px 26px 40px rgba(0, 0, 0, 0.23) inset;
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0px 26px 40px rgba(0, 0, 0, 0.23) inset;
+    }
+    .win {
+        width: 380px;
+        height: 380px;
+        margin: 70px auto 0 auto;
+        background-image: url("images/win_smile.png");
+        background-size: cover;
+    }
+    .lose {
+        width: 380px;
+        height: 380px;
+        margin: 70px auto 0 auto;
+        background-image: url("images/lose_smile.png");
+        background-size: cover;
     }
 }
 
@@ -1190,6 +1207,20 @@ html, body {
         -ms-transform: scale(0.7);
         transform: scale(0.7);
     }
+    .win {
+        width: 330px;
+        height: 330px;
+        margin: 30px auto 0 auto;
+        background-image: url("images/win_smile.png");
+        background-size: cover;
+    }
+    .lose {
+        width: 330px;
+        height: 330px;
+        margin: 30px auto 0 auto;
+        background-image: url("images/lose_smile.png");
+        background-size: cover;
+    }
 }
 
 @media (max-width: 332px) {
@@ -1197,5 +1228,19 @@ html, body {
         -webkit-transform: scale(0.65);
         -ms-transform: scale(0.65);
         transform: scale(0.65);
+    }
+    .win {
+        width: 250px;
+        height: 250px;
+        margin: 30px auto 0 auto;
+        background-image: url("images/win_smile.png");
+        background-size: cover;
+    }
+    .lose {
+        width: 250px;
+        height: 250px;
+        margin: 30px auto 0 auto;
+        background-image: url("images/lose_smile.png");
+        background-size: cover;
     }
 }
