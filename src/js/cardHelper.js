@@ -1,8 +1,9 @@
 import {allCardsInfo} from "./constants/cardsInfo";
 import {speech} from "./speech";
+import {button} from "./gameMode";
 
 export const cardHelper = {
-    createTrainCards: (categoryName) => {
+    createCards: (categoryName) => {
 
         let n = document.querySelector('.for_adding');
 
@@ -18,6 +19,7 @@ export const cardHelper = {
                      <div class="content">
                          <div class="turn_around_button"></div>
                          <p class="card_name toggle_name front_side_name">${elem.name}</p>
+                         <div class="group_green_mark"></div>
                      </div>
                  </div>
                  <div class="back side">
@@ -32,6 +34,7 @@ export const cardHelper = {
 
         let card = document.querySelectorAll(".card");
         let back = document.querySelectorAll(".back");
+        let frontCard = document.querySelectorAll(".front_side_name");
 
         for (let j = 0; j < card.length; j++) {
 
@@ -40,52 +43,14 @@ export const cardHelper = {
             back[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
             back[j].style.backgroundSize = 'cover';
         }
-        card.forEach((elem) => {
+
+        frontCard.forEach((elem) => {
             elem.addEventListener('click', (e) => {
-                speech.speechVoice(e.target.textContent.trim());
+                if (button.classList.contains('switch_off')) {} else {
+                    speech.speechVoice(e.target.textContent.trim());
+                }
             })
         })
 
     },
-
-    createGameCards: (categoryName) => {
-
-        let n = document.querySelector('.for_adding');
-
-        n.insertAdjacentHTML('afterbegin', '<div class="cards__container"></div>');
-        n.setAttribute('about', categoryName);
-        console.log(n);
-
-        allCardsInfo[categoryName].forEach((elem)=> {
-
-            document.querySelector('.cards__container').innerHTML += `
-        <div class="card_box card-wrapper">
-             <div class="container card">
-                 <div class="side front_side">
-                     <div class="content">
-                         <div class="turn_around_button turn_around_inside_category"></div>
-                         <p class="card_name toggle_name switch_off front_side_name">${elem.name}</p>
-                     </div>
-                 </div>
-                 <div class="back side">
-                     <div class="content">
-                     <p class="card_name toggle_name switch_off">${elem.translation}</p>
-                     </div>
-                 </div>
-             </div>
-        </div>
-`
-        });
-
-        let card = document.querySelectorAll(".card");
-        let back = document.querySelectorAll(".back");
-
-        for (let j = 0; j < card.length; j++) {
-
-            card[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
-            card[j].style.backgroundSize = 'cover';
-            back[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
-            back[j].style.backgroundSize = 'cover';
-        }
-    }
 };

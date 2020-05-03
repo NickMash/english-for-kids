@@ -4,34 +4,90 @@ import {cardHelper} from "./js/cardHelper";
 import {speech} from "./js/speech";
 import {moves3d} from "./js/moves3d";
 import {changeMode} from "./js/gameMode";
-import {startGame} from "./js/gameMode";
+import {categoriesInfo} from "./js/constants/categoriesInfo";
+import {allCardsInfo} from "./js/constants/cardsInfo";
+
+categoryHelper.createCategories();
 
 let isChecked = document.querySelector('#checkbox').checked;
-const button = document.querySelector('.return_button');
+const returnButton = document.querySelector('.return_button');
 const navigationContainer = document.querySelector('.navigation__container');
 let switchRadio = document.querySelector('.checkbox');
 let lettersCardContainer = document.querySelector('.letters_card_container');
+let category = document.querySelector(".cards__container");
 
-const openCategory = (categoryName) => {
-    categoryHelper.clearCategories();
-    console.log(isChecked);
-    if (isChecked) {
-        cardHelper.createGameCards(categoryName);
-    } else {
-        cardHelper.createTrainCards(categoryName);
+for (let i = 0; i < categoriesInfo.length; i++) {
+    let array = allCardsInfo[categoriesInfo[i].categoryName];
+
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
-    button.classList.toggle('switch_off');
-    moves3d();
+}
+
+export let styleChange = (e) => {
+    categoryClickHandler(e);
+    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
+        lettersCardContainer.classList.add('letters_card_container_2');
+    }
+    if (document.body.clientWidth < 592) {
+        lettersCardContainer.classList.add('letters_card_container_3');
+        if (returnButton.classList.contains('switch_off')) {
+            returnButton.classList.remove('return_button_2');
+        } else if (isChecked === false) {
+            returnButton.classList.add('return_button_2');
+        }
+    }
 };
 
-categoryHelper.createCategories();
+let categoryClickHandler = (e) => {
+    if (e.target.classList.contains('card_name') || e.target.classList.contains('turn_around_button') ) {
+        e.preventDefault();
+        let path = e.path || (e.composedPath && e.composedPath());
+        if (e.target.classList.contains('turn_around_button')) {
+            let img = e.target.parentNode.parentNode.parentNode;
+
+            img.style.transform = 'rotateY(180deg)';
+            img.style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
+        } else if (e.target.className !== 'turn_around_button' && e.target.className !== 'back') {
+
+            speech.speechVoice(e.target.textContent);
+
+            path.forEach((elem) => {
+
+                if (elem.id && elem.id !== 'categories') {
+                    openCategory(elem.id);
+                }
+            });
+        }
+    }
+};
+
+export const openCategory = (categoryName) => {
+    categoryHelper.clearCategories();
+
+    cardHelper.createCards(categoryName);
+
+    returnButton.classList.remove('switch_off');
+    moves3d();
+};
 
 moves3d();
 
 speech.changeVoice();
 
-button.addEventListener('click', (e) => {
-    e.preventDefault();
+returnButton.addEventListener('click', (e) => {
+
+    let mistakes = document.querySelector('.mistakes_scoreboard');
+    let repeatButton = document.querySelector('.repeat_button');
+
     if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
         if (isChecked === false) {
             lettersCardContainer.classList.remove('letters_card_container_2');
@@ -46,81 +102,39 @@ button.addEventListener('click', (e) => {
             lettersCardContainer.classList.add('letters_card_container_3');
         }
     }
+    mistakes.classList.add('switch_off');
+    repeatButton.classList.add('switch_off');
     categoryHelper.clearCategories();
     categoryHelper.createCategories();
-    button.classList.toggle('switch_off');
+    returnButton.classList.toggle('switch_off');
     let category = document.querySelector(".cards__container");
-    category.addEventListener("click", categoryClickHandler);
-    category.addEventListener("click", () => {
-        if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
-            lettersCardContainer.classList.add('letters_card_container_2');
-        }
-        if (document.body.clientWidth < 592) {
-            lettersCardContainer.classList.add('letters_card_container_3');
-            if (button.classList.contains('switch_off')) {
-                button.classList.remove('return_button_2');
-            } else if (isChecked === false) {
-                button.classList.add('return_button_2');
-            }
-        }
-    });
+    category.addEventListener("click", styleChange);
     moves3d();
 });
+
+category.addEventListener("click", styleChange);
 
 switchRadio.addEventListener("change", (e) => {
     e.preventDefault();
     isChecked = !isChecked;
     changeMode(e, isChecked);
-    console.log(isChecked);
-});
-
-let categoryClickHandler = (e) => {
-    if (e.target.classList.contains('card_name') || e.target.classList.contains('turn_around_button') ) {
-        e.preventDefault();
-        let path = e.path || (e.composedPath && e.composedPath());
-        if (e.target.classList.contains('turn_around_button')) {
-            let img = e.target.parentNode.parentNode.parentNode;
-
-            img.style.transform = 'rotateY(180deg)';
-            img.style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
-        } else if (e.target.className !== 'turn_around_button' && e.target.className !== 'back' && isChecked === false) {
-
-            speech.speechVoice(e.target.textContent);
-
-             path.forEach((elem) => {
-
-                if (elem.id && elem.id !== 'categories') {
-
-                    openCategory(elem.id);
-                }
-             });
-        }
-    }
-};
-
-let category = document.querySelector(".cards__container");
-    category.addEventListener("click", categoryClickHandler);
-    category.addEventListener("click", () => {
-    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
-        lettersCardContainer.classList.add('letters_card_container_2');
-    }
-    if (document.body.clientWidth < 592) {
-        lettersCardContainer.classList.add('letters_card_container_3');
-        if (button.classList.contains('switch_off')) {
-            button.classList.remove('return_button_2');
-        } else if (isChecked === false) {
-            button.classList.add('return_button_2');
-        }
-    }
 });
 
 navigationContainer.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log(e.target);
+
     if (e.target.parentNode.classList.contains('menu_item')) {
+        speech.speechVoice(e.target.parentNode.id);
+        for (let i = 0; i < item.length; i++) {
+            item[i].classList.toggle('menu_item_hidden');
+            item[i].classList.toggle('menu_item');
+        }
+        document.getElementById('shadow_body').classList.toggle('shadow_body_none');
+        document.getElementById('shadow_body').classList.toggle('shadow_body');
+
         let cardNames = document.querySelector('.toggle_name');
+
         let path = e.path || (e.composedPath && e.composedPath());
-        console.log(path);
 
         if (cardNames === null) {
             path.forEach((elem) => {
@@ -186,15 +200,3 @@ for (let i = 0; i < item.length; i++) {
         document.getElementById('shadow_body').classList.toggle('shadow_body');
     });
 }
-
-
-let gameLettersPC = document.querySelector('.game_letters');
-let gameLettersMobile = document.querySelector('.game_letters_mobile');
-
-gameLettersPC.addEventListener('click', (e) => {
-    startGame();
-});
-
-gameLettersMobile.addEventListener('click', (e) => {
-    startGame();
-});
