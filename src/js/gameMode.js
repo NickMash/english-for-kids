@@ -20,6 +20,29 @@ const countMistakes = document.querySelector('.mistakes_scoreboard_name');
 
 gameLettersPC.addEventListener('click', (e, isChecked) => {
 
+    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
+        lettersCardContainer.classList.add('letters_card_container_2');
+        if (button.classList.contains('switch_off') && isChecked === false) {
+            lettersCardContainer.classList.remove('letters_card_container_2');
+        } else {
+            lettersCardContainer.classList.add('letters_card_container_2');
+        }
+    }
+
+    if (document.body.clientWidth < 592) {
+        lettersCardContainer.classList.add('letters_card_container_3');
+        if (button.classList.contains('switch_off') && isChecked === false) {
+            lettersCardContainer.classList.remove('letters_card_container_3');
+        } else {
+            lettersCardContainer.classList.add('letters_card_container_3');
+        }
+        if (button.classList.contains('switch_off') || isChecked === true) {
+            button.classList.remove('return_button_2');
+        } else if (isChecked === false) {
+            button.classList.add('return_button_2');
+        }
+    }
+
     if (button.classList.contains('switch_off')) {
         let randomCategory = categoriesInfo[Math.floor(Math.random() * categoriesInfo.length)].categoryName;
         openCategory(randomCategory);
@@ -63,6 +86,25 @@ gameLettersPC.addEventListener('click', (e, isChecked) => {
 
 gameLettersMobile.addEventListener('click', (e, isChecked) => {
 
+    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
+        lettersCardContainer.classList.add('letters_card_container_2');
+        if (button.classList.contains('switch_off') && isChecked === false) {
+            lettersCardContainer.classList.remove('letters_card_container_2');
+        } else {
+            lettersCardContainer.classList.add('letters_card_container_2');
+        }
+    }
+
+    if (document.body.clientWidth < 592) {
+        lettersCardContainer.classList.add('letters_card_container_3');
+        if (button.classList.contains('switch_off') && isChecked === false) {
+            lettersCardContainer.classList.remove('letters_card_container_3');
+        } else {
+            lettersCardContainer.classList.add('letters_card_container_3');
+        }
+        button.classList.remove('return_button_2');
+    }
+
     if (button.classList.contains('switch_off')) {
         let randomCategory = categoriesInfo[Math.floor(Math.random() * categoriesInfo.length)].categoryName;
         openCategory(randomCategory);
@@ -81,9 +123,9 @@ gameLettersMobile.addEventListener('click', (e, isChecked) => {
 
     const allCardsNames = document.querySelectorAll('.toggle_name');
     const allTurnButtons = document.querySelectorAll('.turn_around_button');
-    mistakes.classList.remove('switch_off');
-    repeatButton.classList.remove('switch_off');
+
     startGame();
+
     if (isChecked) {
         allCardsNames.forEach((elem)=> {
             elem.classList.toggle('switch_off');
@@ -112,35 +154,15 @@ export const changeMode = (e, isChecked) => {
     switchTrain.classList.toggle('switch_off');
     switchGame.classList.toggle('switch_off');
 
-    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
-        lettersCardContainer.classList.add('letters_card_container_2');
-        if (button.classList.contains('switch_off') && isChecked === false) {
-            lettersCardContainer.classList.remove('letters_card_container_2');
-        } else {
-            lettersCardContainer.classList.add('letters_card_container_2');
-        }
-    }
-
-    if (document.body.clientWidth < 592) {
-        lettersCardContainer.classList.add('letters_card_container_3');
-        if (button.classList.contains('switch_off') && isChecked === false) {
-            lettersCardContainer.classList.remove('letters_card_container_3');
-        } else {
-            lettersCardContainer.classList.add('letters_card_container_3');
-        }
-        if (button.classList.contains('switch_off') || isChecked === true) {
-            button.classList.remove('return_button_2');
-        } else if (isChecked === false) {
-            button.classList.add('return_button_2');
-        }
-    }
-
     if (document.body.clientWidth >= 1505) {
         gameLettersPC.classList.toggle('switch_off');
         gameLettersMobile.classList.toggle('switch_on');
     }
 
     if (document.body.clientWidth <= 591) {
+        if (isChecked === false) {
+            button.classList.add('return_button_2');
+        }
         gameLettersPC.classList.toggle('switch_off');
         gameLettersMobile.classList.toggle('switch_on');
     } else {
@@ -339,6 +361,7 @@ export const startGame = () => {
 
             mistakes.classList.add('switch_off');
             repeatButton.classList.add('switch_off');
+            button.classList.add('switch_off');
             categoryHelper.clearCategories();
             categoryHelper.createCategories();
             let category = document.querySelector(".cards__container");

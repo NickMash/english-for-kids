@@ -3,7 +3,7 @@ import {categoryHelper} from './js/categoryHelper.js';
 import {cardHelper} from "./js/cardHelper";
 import {speech} from "./js/speech";
 import {moves3d} from "./js/moves3d";
-import {changeMode} from "./js/gameMode";
+import {button, changeMode} from "./js/gameMode";
 import {categoriesInfo} from "./js/constants/categoriesInfo";
 import {allCardsInfo} from "./js/constants/cardsInfo";
 
@@ -85,23 +85,12 @@ speech.changeVoice();
 
 returnButton.addEventListener('click', (e) => {
 
+    let forAdding = document.querySelector('.for_adding');
     let mistakes = document.querySelector('.mistakes_scoreboard');
     let repeatButton = document.querySelector('.repeat_button');
 
-    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
-        if (isChecked === false) {
-            lettersCardContainer.classList.remove('letters_card_container_2');
-        } else {
-            lettersCardContainer.classList.add('letters_card_container_2');
-        }
-    }
-    if (document.body.clientWidth < 592) {
-        if (isChecked === false) {
-            lettersCardContainer.classList.remove('letters_card_container_3');
-        } else {
-            lettersCardContainer.classList.add('letters_card_container_3');
-        }
-    }
+    forAdding.removeAttribute('about');
+
     mistakes.classList.add('switch_off');
     repeatButton.classList.add('switch_off');
     categoryHelper.clearCategories();
@@ -110,6 +99,18 @@ returnButton.addEventListener('click', (e) => {
     let category = document.querySelector(".cards__container");
     category.addEventListener("click", styleChange);
     moves3d();
+
+    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
+        if (returnButton.classList.contains('switch_off')) {
+            lettersCardContainer.classList.remove('letters_card_container_2');
+        } else {
+            lettersCardContainer.classList.add('letters_card_container_2');
+        }
+    }
+    if (document.body.clientWidth < 592) {
+        lettersCardContainer.classList.remove('letters_card_container_3');
+    }
+
 });
 
 category.addEventListener("click", styleChange);
@@ -124,6 +125,17 @@ navigationContainer.addEventListener("click", (e) => {
     e.preventDefault();
 
     if (e.target.parentNode.classList.contains('menu_item')) {
+
+        if (document.body.clientWidth < 592) {
+            let mistakes = document.querySelector(".mistakes_scoreboard");
+            if (mistakes.classList.contains('switch_off')) {
+                button.classList.add('return_button_2');
+                lettersCardContainer.classList.add('letters_card_container_3');
+            }
+        }
+        if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
+            lettersCardContainer.classList.add('letters_card_container_2');
+        }
         speech.speechVoice(e.target.parentNode.id);
         for (let i = 0; i < item.length; i++) {
             item[i].classList.toggle('menu_item_hidden');
@@ -176,7 +188,6 @@ navigationContainer.addEventListener("click", (e) => {
         }
     }
 });
-
 
 let mainItem = document.getElementById('navigation__main_item');
 let item = document.querySelectorAll(".toggle");

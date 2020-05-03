@@ -10,7 +10,8 @@ export const cardHelper = {
         n.insertAdjacentHTML('afterbegin', '<div class="cards__container"></div>');
         n.setAttribute('about', categoryName);
 
-        allCardsInfo[categoryName].forEach((elem)=> {
+        if (allCardsInfo[categoryName] !== undefined) {
+            allCardsInfo[categoryName].forEach((elem)=> {
 
                 document.querySelector('.cards__container').innerHTML += `
         <div class="card_box card-wrapper">
@@ -32,25 +33,25 @@ export const cardHelper = {
 `
             });
 
-        let card = document.querySelectorAll(".card");
-        let back = document.querySelectorAll(".back");
-        let frontCard = document.querySelectorAll(".front_side_name");
+            let card = document.querySelectorAll(".card");
+            let back = document.querySelectorAll(".back");
+            let frontCard = document.querySelectorAll(".front_side_name");
 
-        for (let j = 0; j < card.length; j++) {
+            for (let j = 0; j < card.length; j++) {
 
-            card[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
-            card[j].style.backgroundSize = 'cover';
-            back[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
-            back[j].style.backgroundSize = 'cover';
-        }
+                card[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
+                card[j].style.backgroundSize = 'cover';
+                back[j].style.backgroundImage = `url(${allCardsInfo[categoryName][j].imageLink})`;
+                back[j].style.backgroundSize = 'cover';
+            }
 
-        frontCard.forEach((elem) => {
-            elem.addEventListener('click', (e) => {
-                if (button.classList.contains('switch_off')) {} else {
-                    speech.speechVoice(e.target.textContent.trim());
-                }
+            frontCard.forEach((elem) => {
+                elem.addEventListener('click', (e) => {
+                    if (button.classList.contains('switch_off')) {} else {
+                        speech.speechVoice(e.target.textContent.trim());
+                    }
+                })
             })
-        })
-
+        }
     },
 };
