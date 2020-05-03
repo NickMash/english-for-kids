@@ -20,7 +20,8 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "npx webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC"

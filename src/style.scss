@@ -550,9 +550,6 @@ html, body {
     height: 66px;
     cursor: pointer;
 }
-.turn_around_inside_category {
-    display: none;
-}
 .mistakes_scoreboard {
     width: 256px;
     height: 31px;
@@ -632,6 +629,31 @@ html, body {
     background: #000000;
     opacity:0.7;
     border: 5px solid #0c9415;
+    width: 266px;
+    height: 266px;
+}
+.incorrect_answer {
+    background: #000000;
+    opacity:0.7;
+    border: 5px solid #941a0b;
+    width: 266px;
+    height: 266px;
+}
+.green_mark {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: url(images/correct_icon.png);
+    background-size: cover;
+    margin: 65px 0 0 68px;
+}
+.red_cross {
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    background: url(images/wrong_icon.png);
+    background-size: cover;
+    margin: 67px 0 0 72px;
 }
 .back {
     -webkit-transform: rotateY(180deg);
@@ -777,7 +799,21 @@ html, body {
  }
 .select_voice:hover {
     transform: scale(1.07);
-    //background: rgba(0, 214, 255, 0.13);
+}
+
+.win {
+    width: 450px;
+    height: 450px;
+    margin: 100px auto 0 auto;
+    background-image: url("images/win_smile.png");
+    background-size: cover;
+}
+.lose {
+    width: 450px;
+    height: 450px;
+    margin: 100px auto 0 auto;
+    background-image: url("images/lose_smile.png");
+    background-size: cover;
 }
 
 @media (min-width: 1505px) {
