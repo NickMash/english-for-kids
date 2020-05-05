@@ -34,11 +34,17 @@ for (let i = 0; i < categoriesInfo.length; i++) {
 
 export let styleChange = (e) => {
     categoryClickHandler(e);
-    if (document.body.clientWidth < 888 && document.body.clientWidth > 591) {
-        lettersCardContainer.classList.add('letters_card_container_2');
+    if (document.body.clientWidth < 888 && document.body.clientWidth > 591 && e.target.className !== 'turn_around_button') {
+        if(e.target.classList.contains('card_box') || e.target.classList.contains('back')) {}
+        else {
+            lettersCardContainer.classList.add('letters_card_container_2');
+        }
     }
-    if (document.body.clientWidth < 592) {
-        lettersCardContainer.classList.add('letters_card_container_3');
+    if (document.body.clientWidth < 592 && e.target.className !== 'turn_around_button') {
+        if(e.target.classList.contains('card_box') || e.target.classList.contains('back')) {}
+        else {
+            lettersCardContainer.classList.add('letters_card_container_3');
+        }
         if (returnButton.classList.contains('switch_off')) {
             returnButton.classList.remove('return_button_2');
         } else if (isChecked === false) {
@@ -48,7 +54,7 @@ export let styleChange = (e) => {
 };
 
 let categoryClickHandler = (e) => {
-    if (e.target.classList.contains('card_name') || e.target.classList.contains('turn_around_button') ) {
+    if (e.target.classList.contains('card_name') || e.target.classList.contains('turn_around_button')) {
         e.preventDefault();
         let path = e.path || (e.composedPath && e.composedPath());
         if (e.target.classList.contains('turn_around_button')) {
@@ -58,7 +64,10 @@ let categoryClickHandler = (e) => {
             img.style.transition = 'transform .8s cubic-bezier(.6, 0, .2, 1)';
         } else if (e.target.className !== 'turn_around_button' && e.target.className !== 'back') {
 
-            speech.speechVoice(e.target.textContent);
+            if (e.target.parentNode.classList.contains('back') || e.target.parentNode.parentNode.classList.contains('back')) {
+            } else {
+                speech.speechVoice(e.target.textContent);
+            }
 
             path.forEach((elem) => {
 
@@ -67,6 +76,9 @@ let categoryClickHandler = (e) => {
                 }
             });
         }
+    }
+    if (e.target.className !== 'turn_around_button') {
+        document.body.scrollTo(0, 0);
     }
 };
 

@@ -359,6 +359,8 @@ export const startGame = () => {
             });
             await prom;
 
+            lettersCardContainer.classList.remove('letters_card_container_2');
+            lettersCardContainer.classList.remove('letters_card_container_3');
             mistakes.classList.add('switch_off');
             repeatButton.classList.add('switch_off');
             button.classList.add('switch_off');
@@ -367,6 +369,7 @@ export const startGame = () => {
             let category = document.querySelector(".cards__container");
             category.addEventListener("click", styleChange);
             moves3d();
+            document.body.scrollTo(0, 0);
         }
     });
 };

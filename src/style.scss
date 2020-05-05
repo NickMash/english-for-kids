@@ -1,12 +1,15 @@
 html {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;
 }
-html, body {
+body {
     width: 100%;
     height: 100%;
     background-image: url('images/background.jpg');
@@ -758,7 +761,7 @@ html, body {
     font-weight:bold;
     font-size: 27px;
     cursor: pointer;
-    text-shadow:0px 0px 0 rgb(202,202,202),1px -1px 0 rgb(158,158,158), 2px -2px 0 rgb(115,115,115),3px -3px 2px rgba(0,0,0,0.6),3px -3px 1px rgba(0,0,0,0.5),0px 0px 2px rgba(0,0,0,.2);
+    text-shadow:0 0 0 rgb(202,202,202),1px -1px 0 rgb(158,158,158), 2px -2px 0 rgb(115,115,115),3px -3px 2px rgba(0,0,0,0.6),3px -3px 1px rgba(0,0,0,0.5),0px 0px 2px rgba(0,0,0,.2);
 }
 .switch_name_game {
     margin-left: -65px;
@@ -781,7 +784,7 @@ html, body {
      z-index: 10;
      border-radius: 25px;
      font-weight:bold;
-     font-size: 25px;
+     font-size: 24px;
      font-family: Garamond, serif;
      color: #fefeff;
      cursor: pointer;
@@ -1186,16 +1189,16 @@ html, body {
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0px 26px 40px rgba(0, 0, 0, 0.23) inset;
     }
     .win {
-        width: 380px;
-        height: 380px;
-        margin: 70px auto 0 auto;
+        width: 370px;
+        height: 370px;
+        margin: 60px auto 0 auto;
         background-image: url("images/win_smile.png");
         background-size: cover;
     }
     .lose {
-        width: 380px;
-        height: 380px;
-        margin: 70px auto 0 auto;
+        width: 370px;
+        height: 370px;
+        margin: 60px auto 0 auto;
         background-image: url("images/lose_smile.png");
         background-size: cover;
     }
@@ -1208,16 +1211,16 @@ html, body {
         transform: scale(0.7);
     }
     .win {
-        width: 330px;
-        height: 330px;
-        margin: 30px auto 0 auto;
+        width: 256px;
+        height: 256px;
+        margin: 25px auto 0 auto;
         background-image: url("images/win_smile.png");
         background-size: cover;
     }
     .lose {
-        width: 330px;
-        height: 330px;
-        margin: 30px auto 0 auto;
+        width: 256px;
+        height: 256px;
+        margin: 25px auto 0 auto;
         background-image: url("images/lose_smile.png");
         background-size: cover;
     }
@@ -1230,15 +1233,15 @@ html, body {
         transform: scale(0.65);
     }
     .win {
-        width: 250px;
-        height: 250px;
+        width: 240px;
+        height: 240px;
         margin: 30px auto 0 auto;
         background-image: url("images/win_smile.png");
         background-size: cover;
     }
     .lose {
-        width: 250px;
-        height: 250px;
+        width: 240px;
+        height: 240px;
         margin: 30px auto 0 auto;
         background-image: url("images/lose_smile.png");
         background-size: cover;
