@@ -35,13 +35,13 @@ for (let i = 0; i < categoriesInfo.length; i++) {
 export let styleChange = (e) => {
     categoryClickHandler(e);
     if (document.body.clientWidth < 888 && document.body.clientWidth > 591 && e.target.className !== 'turn_around_button') {
-        if(e.target.classList.contains('card_box') || e.target.classList.contains('back')) {}
+        if(e.target.classList.contains('card_box') || e.target.classList.contains('back') || e.target.classList.contains('cards__container')) {}
         else {
             lettersCardContainer.classList.add('letters_card_container_2');
         }
     }
     if (document.body.clientWidth < 592 && e.target.className !== 'turn_around_button') {
-        if(e.target.classList.contains('card_box') || e.target.classList.contains('back')) {}
+        if(e.target.classList.contains('card_box') || e.target.classList.contains('back') || e.target.classList.contains('cards__container')) {}
         else {
             lettersCardContainer.classList.add('letters_card_container_3');
         }

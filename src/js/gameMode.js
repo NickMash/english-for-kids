@@ -282,51 +282,30 @@ export const startGame = () => {
         else if (e.target.textContent.trim() !== shuffledArray[i].name) {
             for (let j = 0; j < allCardsInfo[categoryName].length; j++) {
 
-                if (e.target.classList.contains('green_mark') && e.target.previousElementSibling.textContent.trim() === allCardsInfo[categoryName][j].name) {
-
-                    e.target.classList.remove('green_mark');
-                    e.target.parentNode.classList.add('incorrect_answer');
-
-                    incorrectAnswers.push(e.target.textContent.trim());
-                    let previousMistakes = document.querySelector('.count');
-                    previousMistakes.remove();
-                    countMistakes.insertAdjacentHTML('afterend', '<div class="mistakes_scoreboard_name count">' + incorrectAnswers.length + '</div>');
-                    let audio = new Audio();
-                    audio.preload = 'auto';
-                    audio.src = 'sounds/wrong_answer.mp3';
-                    audio.play();
-
-
-                    let prom = new Promise((resolve, reject) => {
-                        setTimeout(() => resolve(), 290)
-                    });
-                    await prom;
-                    e.target.classList.add('red_cross');
-                }
-
                 if (e.target.textContent.trim() === allCardsInfo[categoryName][j].name) {
 
-                    e.target.lastChild.previousElementSibling.classList.remove('green_mark');
-                    e.target.classList.add('incorrect_answer');
+                    if (e.target.classList.contains('correct_answer')) {} else {
+                        e.target.classList.add('incorrect_answer');
 
-                    let audio = new Audio();
-                    audio.preload = 'auto';
-                    audio.src = 'sounds/wrong_answer.mp3';
-                    audio.play();
+                        let audio = new Audio();
+                        audio.preload = 'auto';
+                        audio.src = 'sounds/wrong_answer.mp3';
+                        audio.play();
 
 
-                    let prom = new Promise((resolve, reject) => {
-                        setTimeout(() => resolve(), 290)
-                    });
-                    await prom;
+                        let prom = new Promise((resolve, reject) => {
+                            setTimeout(() => resolve(), 290)
+                        });
+                        await prom;
 
-                    e.target.lastChild.previousElementSibling.classList.add('red_cross');
+                        e.target.lastChild.previousElementSibling.classList.add('red_cross');
 
-                    incorrectAnswers.push(e.target.textContent.trim());
-                    let previousMistakes = document.querySelector('.count');
-                    previousMistakes.remove();
+                        incorrectAnswers.push(e.target.textContent.trim());
+                        let previousMistakes = document.querySelector('.count');
+                        previousMistakes.remove();
 
-                    countMistakes.insertAdjacentHTML('afterend', '<div class="mistakes_scoreboard_name count">' + incorrectAnswers.length + '</div>');
+                        countMistakes.insertAdjacentHTML('afterend', '<div class="mistakes_scoreboard_name count">' + incorrectAnswers.length + '</div>');
+                    }
                 }
             }
         }

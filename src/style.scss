@@ -1,15 +1,13 @@
 html {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    width: 100%;
-    height: 100%;
     overflow: auto;
 }
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;
 }
-body {
+body, html {
     width: 100%;
     height: 100%;
     background-image: url('images/background.jpg');
@@ -652,11 +650,11 @@ body {
 }
 .red_cross {
     position: absolute;
-    width: 125px;
-    height: 125px;
+    width: 276px;
+    height: 276px;
     background: url(images/wrong_icon.png);
     background-size: cover;
-    margin: 67px 0 0 72px;
+    margin: -5px 0 0 -5px;
 }
 .back {
     -webkit-transform: rotateY(180deg);
@@ -777,10 +775,10 @@ body {
 }
 
 .select_voice {
-     width: 132px;
+     width: 128px;
      height: 30px;
      margin: 15px 0 0 1px;
-     padding: 2px 0 0 7px;
+     padding: 3px 0px 0 11px;
      z-index: 10;
      border-radius: 25px;
      font-weight:bold;
